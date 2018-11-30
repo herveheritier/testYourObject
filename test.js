@@ -204,7 +204,7 @@ const Test = {
         Si le test est ok, l'évaluation est rejouée `Test.repeat` fois pour mesurer les performances
     ])
     */    
-    run : (ev,attempt,validFunc=null) => {
+    run : (ev,attempt,validFunc=null,postPerfFunc=null) => {
         Test.count++
         var code = Test.extractCode(ev)
         console.group(code ? code : ev)
@@ -242,10 +242,22 @@ const Test = {
         if(ok) {
             console.log("Test passed... ")
             if(repeat) {
-                var t0 = performance.now()
-                for(var i =0;i<Test.repeat;i++) ev()
-                var t1 = performance.now()
-                console.log((t1-t0).toFixed(2)+"ms elapsed for "+Test.repeat+" executions")
+                if(postPerfFunc==null) {
+                    var t0 = performance.now()
+                    for(var i =0;i<Test.repeat;i++) ev()
+                    var t1 = performance.now()
+                    console.log((t1-t0).toFixed(2)+"ms elapsed for "+Test.repeat+" executions")
+                }
+                else {
+                    var tt = 0.0
+                    for(var i =0;i<Test.repeat;i++) {
+                        var t0 = performance.now()
+                        ev()
+                        tt += (performance.now() - t0)
+                        postPerfFunc()
+                    }
+                    console.log((tt).toFixed(2)+"ms elapsed for "+Test.repeat+" executions")
+                }
             }
             else {
                 console.log("Performance analysis not run due to testing an error case")
