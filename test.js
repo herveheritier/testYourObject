@@ -6,15 +6,17 @@
 
 * Usage
 
-To run a test, just call the `Test.run` function with 2 ou 3 arguments :
+To run a test, just call the `Test.run` function with 2, 3 or 4 arguments :
 - 1st argument is a function to test. Declare it as a callback function.
 - 2nd argument is the expected value by running the function to test
 - 3rd argument is optionnaly to declare only when the 2nd argument is null ;
   it's an other callback function wich is used to control result of the  function to test.
   It's take one argument, the tested function result.
   And it must return a boolean value : true if the test is passed, else false if failed.
+- 4th argument is optionnaly to declare a callback function called after each performance cycle ;
+  it could be necessary for example as a cleaner action before recalled the tested function.
 
-Tested function, tested function result and check result are dispayed.
+Tested function, tested function result and check result are displayed.
 
 `Test.run(testedFunction,expectedResult,controlFunction)` : run a test
 
@@ -58,13 +60,15 @@ By default, they are also displayed into the devTools console, but it's possible
 
 * Utilisation
 
-Pour exécuter un test, appelez la fonction `Test.run` avec 2 ou 3 arguments :
+Pour exécuter un test, appelez la fonction `Test.run` avec 2, 3 ou 4 arguments :
 - Le 1er argument est une fonction à tester. Déclarez-le comme fonction de callback.
 - Le 2ème argument est la valeur attendue au retour de l'exécution de la fonction à tester
 - Le 3ème argument (optionnel) est à déclarer seulement quand le 2ème argument est nul ;
   c'est une autre fonction de callback utilisée pour contrôler le résultat de la fonction à tester.
   Il nécessite un argument, le résultat de la fonction testée.
   Elle doit retourner une valeur booléenne : true si le test est réussi, false en cas d'échec.
+- Le 4ème argument (optionnel) sert à déclarer une fonctionde callback appelée après chaque cycle du calcul des performances ;
+  il peut être nécessaire par exemple pour faire du nettoyage avant de rappeler la fonction testée.
 
 La fonction testée, le résultat de la fonction testée et le résultat du contrôle sont affichés.
 
