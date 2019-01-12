@@ -61,4 +61,5 @@ The natives console.log, console.group and console.groupEnd functions are refact
 By default, they are also displayed into the devTools console, but it's possible to mute it ; this capability is reversible.
 
 `Test.devToolsMute()` : mute the console.log function
+
 `Test.devToolsLoud()` : activate the console.log function
