@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(49, 49, 49);
+    color: gray;
+    font-size: 9pt;
+    display: inline-block;
+    position: relative;
+    left: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    /*white-space: pre-wrap;*/
+
+}
+h1 {
+    color: rgb(218, 218, 218);
+    font-size: 12pt;
+    position: relative;
+    left: -40px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+h2 {
+    color: rgb(202, 202, 202);
+    font-size: 11pt;
+    position: relative;
+    left: -30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+h3 {
+    color: rgb(172, 172, 172);
+    font-size: 10pt;
+    position: relative;
+    left: -20px;
+}
+iframe {
+    border: 1px solid black;
+    width: calc(100vw - 200px);
+    height: 80vh;
+    overflow: hidden;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: inline;
+}

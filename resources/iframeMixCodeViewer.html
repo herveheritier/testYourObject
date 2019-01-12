@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-size: x-small;
+                overflow: hidden;
+                margin: 0 0 0 0;
+                padding: 0px;
+            }
+            select {
+                position: relative;
+                float: right;
+                z-index: 99;
+            }
+            pre {
+                position: absolute;
+                top: -10px;
+                left: 0px;
+                height: calc(100%);
+                width: calc(100%);
+            }
+        </style>
+        <script>
+            splitRegex = new RegExp(/(\/\*)|(\*\/)/)
+            commentRegex = new RegExp(/\(lang,(EN|FR):\[([^\]]*)\]\)/gm)
+            init = () => window.parent.setUpFrame(document.location.search)
+            var code = ""
+            var multilingue = false
+            populate = (lang) => {
+                document.querySelector("#src1").innerHTML=""
+                var c = cut(code)
+                c.forEach((e) =>{
+                    if(e.lang) if(e.lang!=lang) return
+                    // var tn = Prism.highlight(e.text,e.comment ? Prism.languages.markdown : Prism.languages.javascript)
+                    var tn = Prism.highlight(e.text,Prism.languages.javascript)
+                    document.querySelector("#src1").innerHTML+=tn
+                })
+                if(!multilingue) document.querySelector('#langSelector').style.display="none"
+            }
+            loadCode = (file) => {
+                var source = window.top.location.href.replace(/[^/]*$/, '')+file.replace(/^\//,'')
+                var req = new XMLHttpRequest()
+                req.open("GET",source,true,false)
+                req.addEventListener("load",(e) => {
+                    code=e.currentTarget.response
+                    populate("EN")
+                })
+                req.send(null)
+            }
+            cut = (code) => {
+                var r = code.split(splitRegex)
+                var comment = false
+                var res = []
+                r.forEach((e) => {
+                    switch(e) {
+                        case "": break
+                        case "/*" : comment = true; break
+                        case "*/" : comment = false; break
+                        case undefined : break
+                        default : {
+                            if(comment) {
+                                var l = e.match(commentRegex)
+                                if(l) {
+                                    l.forEach( (m) => {
+                                        var d = /\(lang,(EN|FR):\[([^\]]*)\]\)/gm.exec(m)
+                                        if(d[1]) {
+                                            multilingue = true
+                                            res.push({ comment:true, text:"/*"+d[2]+"*/", lang:d[1] })
+                                        }
+                                    })
+                                }
+                                else res.push({ comment:true, text:"/*"+e+"*/" })
+                            }
+                            else 
+                            {
+                                res.push({comment:false, text:e})
+                            }
+                            break
+                        }
+                    }
+                })
+                return res
+            }
+        </script>
+        <link href="./prism.css" rel="stylesheet" />
+        <script src="./prism.js"></script>
+    </head>
+    <body onload="init()">
+        <select id="langSelector" onchange = "populate(this.value)">
+            <option value="EN">English</option>
+            <option value="FR">Francais</option>
+        </select>
+        <pre><code id="src1" class=" language-javascript"></code></pre>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script id="testSrc" src="scripts/test.js"></script>
+        <link rel="stylesheet"  href="styles/base.css"/>
+        <style>
+            code {
+                color: green;
+            }
+            .title {
+                display: block;
+                font-size: x-large;
+                color: lemonchiffon;
+            }
+            a, a:checked {
+                color: gray
+            }
+            button {
+                background-color : gray;
+                border: 2px solid black;
+                color: black;
+            }
+            button:hover {
+                background-color : black;
+                border: 2px solid gray;
+                color: gray;
+                cursor: hand;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="title">Test class</h1>
+        Test class offering basics test object facilities.<br/>
+        <h2>Tests class source code</h2>
+        <a download href="script/test.js">Download the test.js source</a><br/>
+        <br/>
+        <button onclick="var cl=document.querySelector('#TestSource').classList; cl.toggle('hide'); cl.toggle('show')">show/hide source code</button><br/>
+        <iframe id="TestSource" name="i1" src="resources/iframeMixCodeViewer.html?i1" class="hide"></iframe>
+
+        <script>
+            setUpFrame = (e) => window.frames['i1'].loadCode("scripts/test.js")
+        </script>
+
+        <h1 class="title">Test passed</h1>
+        If you want to verifiy that yout tested function <code>()=>1==1</code> return the <code>true</code> value then code
+        <code>Test.run(()=>1==1,true)</code><br/>
+        See the result below<br/>
+        For this sample, the test is passed because the attempted value is equal to the result value.<br/>
+        As the test passed, the tested function is reruned 1000 times to mesure his performance.
+        <script>
+            Test.run(()=>1==1,true)
+        </script>
+        <h1 class="title">Test failed</h1>
+        If your want to verifiy that yout tested function <code>()=>1==0</code> return <code>true</code> value then code
+        <code>Test.run(()=>1==0,true)</code><br/>
+        For this sample the test is failed because the attempted value is diffrent to the result value.
+        <script>
+            Test.run(()=>1==0,true)
+        </script>
+        <h1 class="title">Control function</h1>
+        If the tested fuction do not return a constant value the code a control function :<br/>
+        - tested function <code>Math.random()*10>>0</code><br/>
+        - control function <code>e=>e<10</code><br/>
+        <br/>
+        Write your test code as is<br/>
+        <code>Test.run(()=>Math.random()*10>>0,null,e=>e<10)</code><br/>
+        <br/>
+        The result is
+        <script>
+            Test.run(()=>Math.random()*10>>0,null,e=>e<10)
+        </script>
+        <h1 class="title">Performance computing - setting number of iterations</h1>
+        By default, the tested function is rerun 1000 times.
+        You would like to change the numbr of iterations by calling the <code>Test.setRepeat(n)</code> method.<br/>
+        <br/>
+        <code>Test.setRepeat(200)</code><br/>
+        <br/>
+        Now, for the next sample, the performance computing called only 200 times the tested function.
+        <script>
+            Test.setRepeat(200)
+        </script>
+        <h1 class="title">Performance computing - setting context</h1>
+        The performance computing done after the test passed may need a specific context reuse after every run of the tested function.<br/>
+        In the case, you need to code an init function to prepare the context.<br/>
+        <br/>
+        Sample<br/>
+        <code>var arrayOfString = ["orange","banana","citrus","apple"]</code><br/>
+        <code>var myfunction = e => e = e.sort()</code><br/>
+        <code>Test.run(()=>myfunction(arrayOfString),null,e=>e[0]=="apple",() => arrayOfString = ["orange","banana","citrus","apple"])</code><br/>
+        <br/>
+        The result is
+        <script>
+            var arrayOfString = ["orange","banana","citrus","apple"]
+            var myfunction = e => e = e.sort()
+            Test.run(()=>myfunction(arrayOfString),null,e=>e[0]=="apple",() => arrayOfString = ["orange","banana","citrus","apple"])
+        </script>
+        <h1 class="title">Console log</h1>
+        By default, the tests' results are log into the navigator console.<br/>
+        To do not log, you need to call the <code>Test.devToolsMute()</code> method<br/>
+        To reactive the log, you need to call the <code>Test.devToolsLoud()</code> method<br/>
+        <br/>
+        <img src="resources/console.png"/>
+        <h1 class="title">Test report</h1>
+        To obtain a test report about all tests, you need to call the <code>Test.results()</code> method.<br/>
+        See the report as below
+        <script>
+            Test.results()
+        </script>
+    </body>
+</html>
