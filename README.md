@@ -1,4 +1,4 @@
-`Test` object offering test facilities
+Test object offering test facilities
 ==
 
 Demo page : [heritier.herve.free.fr/testYourObject](http://heritier.herve.free.fr/testYourObject/)
