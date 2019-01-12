@@ -3,8 +3,10 @@
 
 Demo page : [heritier.herve.free.fr/testYourObject](http://heritier.herve.free.fr/testYourObject/)
 
-`Test.run(testedFn,expectedResult[[,ctrlFn],ctxtFn])` : run a test
+Test.run : run a test
 -
+
+`Test.run(testedFn,expectedResult[[,ctrlFn],ctxtFn])`
 
 To run a test, just call the `Test.run` function with 2, 3 or 4 arguments :
 - testedFn : 
@@ -36,11 +38,15 @@ The `Test.run` function logic is as is :
 - if test is passed (but not with a raised exception) rerun the tested function as much as requested to compute
   the elapsed time the display it. The rerun depends on the `Test.repeat` value equal to 1000 by default.
 
-`Test.setRepeat(n)` : force the rerun `Test.repeat` value
+Test.setRepeat : force the rerun `Test.repeat` value
 --
 
-`Test.results()` : display statistics
+`Test.setRepeat(n)`
+
+Test.results : display statistics
 --
+
+`Test.results()`
 
 After running all tests, call the `Test.results` function to display statistics for all tests runned since the previous `Test.results` calling.
 The calling reset the statistics.
