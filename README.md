@@ -1,7 +1,7 @@
 `Test` object offering test facilities
 ==
 
-[heritier.herve.free.fr/testYouApp](http://heritier.herve.free.fr/testYouApp/)
+[heritier.herve.free.fr/testYouObject](http://heritier.herve.free.fr/testYouObject/)
 
 `Test.run(testedFn,expectedResult[[,ctrlFn],ctxtFn])` : run a test
 -
